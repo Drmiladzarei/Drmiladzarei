@@ -39,22 +39,34 @@ button{font:inherit}
 
 .hero{
   min-height:100svh;position:relative;display:flex;align-items:center;overflow:hidden;
-  background:#020914 url("hero.png") center/cover no-repeat
+  background:#020914;
 }
-.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(1,8,15,.62) 0%,rgba(1,8,15,.30) 47%,rgba(1,8,15,.04) 100%)}
-.hero-overlay{position:absolute;inset:0;background:radial-gradient(circle at 13% 45%,rgba(8,56,103,.22),transparent 35%)}
-.hero-content{position:relative;z-index:2;width:min(760px,55vw);margin-left:6.9%;padding-top:70px}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background:url("hero.png") center/cover no-repeat;
+  transform:scaleX(-1);
+  transform-origin:center;
+}
+.hero::after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,rgba(1,7,13,.02) 0%,rgba(1,7,13,.10) 38%,rgba(1,7,13,.58) 63%,rgba(1,7,13,.91) 100%),
+    linear-gradient(180deg,rgba(1,7,13,.18),rgba(1,7,13,.22));
+  pointer-events:none;
+}
+.hero-overlay{position:absolute;inset:0;z-index:1;background:radial-gradient(circle at 18% 45%,rgba(8,56,103,.16),transparent 34%)}
+.hero-content{position:relative;z-index:2;width:min(760px,49vw);margin-left:auto;margin-right:6.5%;padding-top:70px}
 .signature-wrap{height:178px;position:relative;color:var(--gold)}
 .doctor-signature{
   font-family:"Brush Script MT","Segoe Script",cursive;font-size:79px;font-style:italic;
   transform:rotate(-7deg);display:inline-block;text-shadow:0 0 18px rgba(232,189,108,.12)
 }
-.signature-mz{font-family:"Brush Script MT","Segoe Script",cursive;font-size:66px;font-style:italic;position:absolute;left:185px;top:90px;transform:rotate(-5deg)}
-.eyebrow{position:absolute;left:82%;top:50px;width:250px;border-left:2px solid var(--gold);padding-left:22px;color:#ead9b9;font-size:20px;line-height:1.45;font-style:italic}
+.signature-mz{font-family:"Brush Script MT","Segoe Script",cursive;font-size:66px;font-style:italic;position:absolute;right:185px;top:90px;transform:rotate(-5deg)}
+.eyebrow{display:inline-block;width:300px;border-right:2px solid var(--gold);padding-right:20px;margin:0 0 22px;color:#ead9b9;font-size:20px;line-height:1.45;font-style:italic;text-align:right}
 .hero h1{margin:0 0 12px;color:var(--gold2);font-size:66px;line-height:1.05;font-weight:500}
 .hero h2{margin:0 0 18px;font-family:Arial,sans-serif;font-size:22px;letter-spacing:7px;font-weight:400}
 .tagline{font-size:18px;color:#e6d8bd;margin:0}
-.hero-links{display:flex;gap:30px;margin-top:65px}
+.hero-links{display:flex;gap:30px;margin-top:55px;justify-content:flex-start}
 .quick-link{width:105px;display:flex;flex-direction:column;align-items:center;gap:11px;font-size:16px;color:#f0d7a6}
 .quick-icon{width:78px;height:78px;border:1.4px solid var(--gold);border-radius:50%;display:grid;place-items:center;font-family:Arial;font-size:33px;color:var(--gold2)}
 .quick-link small{font-size:21px;color:var(--gold)}
@@ -86,8 +98,8 @@ footer{padding:30px 7%;display:flex;justify-content:space-between;gap:20px;backg
 [dir="rtl"] body{font-family:Tahoma,Arial,sans-serif}
 [dir="rtl"] .site-header{flex-direction:row-reverse}
 [dir="rtl"] .desktop-nav{flex-direction:row-reverse}
-[dir="rtl"] .hero-content{margin-left:0;margin-right:6.9%;text-align:right}
-[dir="rtl"] .eyebrow{left:auto;right:82%;border-left:0;border-right:2px solid var(--gold);padding-left:0;padding-right:22px}
+[dir="rtl"] .hero-content{margin-left:auto;margin-right:6.5%;text-align:right}
+[dir="rtl"] .eyebrow{border-left:0;border-right:2px solid var(--gold);padding-left:0;padding-right:20px}
 [dir="rtl"] .signature-mz{left:auto;right:185px}
 [dir="rtl"] .desktop-nav a:after{transform-origin:right}
 [dir="rtl"] footer{flex-direction:row-reverse}
@@ -100,16 +112,39 @@ footer{padding:30px 7%;display:flex;justify-content:space-between;gap:20px;backg
   .site-header{height:76px}.brand-signature{font-size:48px}
   .desktop-nav{display:none}.menu-btn{display:block}
   .header-actions{margin-left:auto}
-  .hero{background-position:58% center;align-items:flex-end;padding-bottom:60px}
-  .hero:before{background:linear-gradient(180deg,rgba(1,8,15,.48),rgba(1,8,15,.78) 65%,rgba(1,8,15,.94))}
-  .hero-content{width:100%;margin:0;padding:0 7%}
-  .signature-wrap{height:125px}.doctor-signature{font-size:60px}.signature-mz{font-size:48px;left:140px;top:67px}
-  .eyebrow{position:static;width:auto;display:inline-block;margin-bottom:18px;border-left:2px solid var(--gold);padding-left:15px;font-size:16px}
-  .hero h1{font-size:44px}.hero h2{font-size:16px;letter-spacing:4px}.tagline{font-size:15px}
-  .hero-links{gap:12px;margin-top:38px;justify-content:space-between}
-  .quick-link{width:23%;font-size:13px}.quick-icon{width:62px;height:62px;font-size:26px}
-  .cards,.patient-grid{grid-template-columns:1fr}
+  .hero{min-height:100svh;align-items:center}
+  .hero::before{
+    background-position:center center;
+    transform:scaleX(-1);
+  }
+  .hero::after{
+    background:
+      linear-gradient(90deg,rgba(1,7,13,.02) 0%,rgba(1,7,13,.10) 28%,rgba(1,7,13,.72) 58%,rgba(1,7,13,.96) 100%),
+      linear-gradient(180deg,rgba(1,7,13,.12),rgba(1,7,13,.35));
+  }
+  .hero-content{
+    width:53%;margin-left:auto;margin-right:5.5%;
+    padding:70px 0 35px;text-align:right;
+  }
+  .signature-wrap{height:112px}
+  .doctor-signature{font-size:58px;white-space:nowrap}
+  .signature-mz{font-size:46px;right:118px;top:62px}
+  .eyebrow{
+    width:auto;max-width:100%;font-size:15px;line-height:1.5;
+    margin:0 0 16px;padding-right:12px;border-right:2px solid var(--gold)
+  }
+  .hero h1{font-size:38px;line-height:1.12;margin-bottom:12px}
+  .hero h2{font-size:13px;letter-spacing:2px;line-height:1.8;margin-bottom:10px}
+  .tagline{font-size:13px;line-height:2}
+  .hero-links{
+    gap:7px;margin-top:34px;justify-content:space-between;
+    flex-wrap:nowrap;
+  }
+  .quick-link{width:24%;font-size:11px;gap:7px;text-align:center}
+  .quick-icon{width:55px;height:55px;font-size:22px}
+  .quick-link small{font-size:17px}
   .content-section h2,.appointment-section h2{font-size:38px}
+  .cards,.patient-grid{grid-template-columns:1fr}
   .appointment-inner{flex-direction:column;align-items:flex-start}
 }
 @media(max-width:560px){
@@ -118,12 +153,27 @@ footer{padding:30px 7%;display:flex;justify-content:space-between;gap:20px;backg
   .appointment-btn{font-size:0;min-width:45px;width:45px;height:45px;padding:0}
   .appointment-btn .calendar-icon{font-size:17px}
   .menu-btn{width:38px}
-  .hero{min-height:760px;background-position:62% center}
-  .hero-content{padding:0 6%;padding-bottom:12px}
-  .signature-wrap{height:105px}.doctor-signature{font-size:49px}.signature-mz{font-size:39px;left:116px;top:55px}
-  .hero h1{font-size:35px}.hero h2{font-size:13px;letter-spacing:2.5px}
-  .tagline{font-size:13px}.hero-links{gap:3px}
-  .quick-link{font-size:11px}.quick-icon{width:54px;height:54px;font-size:22px}
+  .hero{min-height:760px}
+  .hero::before{background-position:57% center}
+  .hero::after{
+    background:
+      linear-gradient(90deg,rgba(1,7,13,.00) 0%,rgba(1,7,13,.16) 25%,rgba(1,7,13,.80) 56%,rgba(1,7,13,.98) 100%),
+      linear-gradient(180deg,rgba(1,7,13,.10),rgba(1,7,13,.30));
+  }
+  .hero-content{
+    width:55%;margin-right:5%;padding:85px 0 20px;
+  }
+  .signature-wrap{height:88px}
+  .doctor-signature{font-size:43px}
+  .signature-mz{font-size:35px;right:87px;top:48px}
+  .eyebrow{font-size:12px;margin-bottom:11px;padding-right:9px}
+  .hero h1{font-size:29px;margin-bottom:9px}
+  .hero h2{font-size:11px;letter-spacing:1px;line-height:1.8;margin-bottom:6px}
+  .tagline{font-size:11px;line-height:1.9}
+  .hero-links{gap:2px;margin-top:25px}
+  .quick-link{font-size:9px}
+  .quick-icon{width:47px;height:47px;font-size:19px}
+  .quick-link small{font-size:15px}
   .content-section,.appointment-section{padding:75px 6%}
   .content-section h2,.appointment-section h2{font-size:31px}
   footer{flex-direction:column}
